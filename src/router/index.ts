@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import haveAuthGuard from "./authGuard";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/products",
     name: "products",
+    beforeEnter: [haveAuthGuard],
     component: () =>
       import(
         /* webpackChunkName: "products" */ "../views/ProductsListView.vue"
@@ -18,6 +20,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/products/:id",
     name: "product-detail",
+    beforeEnter: [haveAuthGuard],
     component: () =>
       import(
         /* webpackChunkName: "product-detail" */ "../views/ProductDetailView.vue"
@@ -30,6 +33,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/profile",
     name: "profile",
+    beforeEnter: [haveAuthGuard],
     component: () =>
       import(/* webpackChunkName: "profile" */ "../views/ProfileView.vue"),
   },
